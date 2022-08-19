@@ -1,0 +1,68 @@
+@use "sass:math";
+
+
+// Using variables
+$primary_color: #ff4500;
+$secondary_color: #555;
+$font_size: 12px;
+
+$first-width: 5px;
+$second-width: 5px;
+
+
+
+
+//mixins
+@mixin border ($color: red){
+    background-color: $color;
+    border-bottom: 10px solid $color;
+}
+.border1{
+    @include border;
+}
+.border2{
+    @include border($color: blue)
+}
+
+body{
+    color: $secondary_color;
+    text-align: center;
+}
+nav{
+    ul{
+       list-style: none;
+    margin: 10px 15px; 
+    }
+    li{
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+    }
+    a{
+        color: $primary_color;
+        text-decoration: none;
+        letter-spacing: 1px;
+    }
+}
+div{
+    margin: 10px 20px;
+    letter-spacing: 1px;
+
+    h2{
+        font-weight: bold;
+    }
+}
+
+// function derivatives
+@function adjust_width($n) {
+    @return $n * $first-width + ($n - 1) * $second-width;
+ } 
+ #set_width { padding-left: adjust_width(10); }
+
+
+ .container{
+     width: math.div(600px, 960px) * 100%;
+     margin: 10px auto;
+ }
