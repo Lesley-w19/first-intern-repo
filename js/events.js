@@ -17,6 +17,19 @@ const myEvvent = new Event("myEvent", {
   composed: true,
 });
 
+//implementation
+const btnClick = new Event("btnClick", {
+    bubbles: true,
+    composed: true,
+    cancelable: true,
+  });
+  btnName.addEventListener("click", (event) => {
+    event.preventDefault();
+    addName();
+  });
+  
+  btnName.dispatchEvent(btnClick);
+
 //using the custom event constructor
 const myEvent = new CustomEvent("myEvent", {
   bubbles: true,
