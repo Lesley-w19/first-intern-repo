@@ -94,29 +94,28 @@ promise
   });
 
 //impelementation
-let pswd = document.querySelector(".pwd").value;
-let confirmPwd = document.querySelector(".confirm-pwd").value;
-console.log(confirmPwd, pswd);
 
-let matchPassword = new Promise((resolve, reject) => {
-  if (pswd === confirmPwd) {
-    resolve();
-  } else {
-    reject();
-  }
-});
-promise
-  .then(() => {
-    document.querySelector(".error-mesge").innerHTML =
-      "Passwords are a match!!";
-  })
-  .catch(() => {
-    document.querySelector(".error-mesge").style.color = "red";
-    document.querySelector(".error-mesge").innerHTML =
-      "Passwords do not match!!";
-  });
 document.querySelector(".btn-confirm").addEventListener("click", () => {
-  matchPassword;
+  let pswd = document.querySelector(".pwd").value;
+  let confirmPwd = document.querySelector(".confirm-pwd").value;
+  let matchPassword = new Promise((resolve, reject) => {
+    if (pswd === confirmPwd) {
+      resolve();
+    } else {
+      reject();
+    }
+  });
+
+  matchPassword
+    .then(() => {
+      document.querySelector(".error-mesge").innerHTML =
+        "Passwords are a match!!";
+    })
+    .catch(() => {
+      document.querySelector(".error-mesge").style.color = "red";
+      document.querySelector(".error-mesge").innerHTML =
+        "Passwords do not match!!";
+    });
 });
 
 const addName = () => {
