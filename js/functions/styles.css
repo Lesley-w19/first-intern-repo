@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body{
+    letter-spacing: 1px;
+}
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    font-size: 30px;
+}
+form{
+    margin: 10px auto;
+    padding: 20px 25px;
+    background-color: bisque;
+ border-radius: 1rem;
+}
+.form-label{
+text-transform: capitalize;
+}
+.btn-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

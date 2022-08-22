@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.event-wrapper {
+  padding: 20px 30px;
+}
+.event-wrapper h2 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  color: #fff;
+}
+.event-wrapper h5 {
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+.event-wrapper:nth-child(odd) {
+  background-color: rgba(246, 190, 121, 0.941);
+}
+.event-wrapper:nth-child(even) {
+  background-color: rgba(56, 118, 199, 0.822);
+}
+.btn {
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+.name-wrapper {
+  font-weight: bolder;
+}
