@@ -102,3 +102,18 @@ shoppingcrt.item_description = "Family biscuits";
        // Whole-script strict mode syntax
     'use strict';
     let v = "strict mode script!";
+
+
+    // closures
+    function sayHello() {
+        var say = function()
+         {
+            console.log(hello);
+           }
+        // Local variable that ends up within the closure 
+        var hello = 'Hello, world!';
+        return say;
+      }
+      var sayHelloClosure = sayHello(); 
+      sayHelloClosure();
+       // ‘Hello, world!’
