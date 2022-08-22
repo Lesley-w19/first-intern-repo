@@ -79,29 +79,4 @@ const showTasks = () => {
 
 //}
 
-const addName = () => {
-  const name = prompt("Enter task name");
-  document.querySelector(".name-list").innerHTML = name;
-};
-const changeBgcolor = () => {
-  document.querySelector(".name-list").style.backgroundColor =
-    "rgba(255,255,5,0.8)";
-};
-const btnName = document.querySelector(".btn-name");
 
-// btnName.addEventListener("click", addName);
-// btnName.addEventListener("click", changeBgcolor);
-
-const btnClick = new Event("btnClick", {
-  bubbles: true,
-  composed: true,
-  cancelable: true,
-  detail: {},
-});
-btnName.addEventListener("click", (event) => {
-  console.log(event.detail);
-  event.preventDefault();
-  addName();
-});
-
-btnName.dispatchEvent(btnClick);
