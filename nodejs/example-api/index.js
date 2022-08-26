@@ -9,6 +9,8 @@ const _ = require("lodash");
 // require uuid  -to generate a unique id
 const { v4: uuid } = require("uuid");
 
+const path = require("path");
+
 //setup the server
 const app = express();
 
@@ -30,10 +32,21 @@ app.get("/clothes", (req, res) => {
 });
 
 app.use(express.json());
-
+//get all books
+app.get("/books", async (req, res) => {
+  try {
+    const files = await fs.readdir(path.join(__dirname, "./data/books"));
+    res.json({
+      files: files,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 app.post("/books", async (req, res) => {
   const id = uuid();
-  const content = req.body.content;
+  //JSON.stringify() function is used to convert a JavaScript object into a string.
+  const content = JSON.stringify(req.body.content);
 
   //status return if content not found
   if (!content) {
@@ -49,25 +62,58 @@ app.post("/books", async (req, res) => {
 
   res.status(201).json({
     id: id,
-  });
-});
-
-app.get("/books/:id", async (req, res) => {
-  const id = req.params.id;
-  let content;
-
-  try {
-    content = await fs.readFile(`data/books/${id}.txt`, "utf-8");
-  } catch (error) {
-    console.log(error);
-  }
-  res.json({
     content: content,
   });
 });
+//get from a given file
+app.get("/books/:id", async (req, res) => {
+  const id = req.params.id;
+  let content;
+  let data;
+  try {
+    content = await fs.readFile(`data/books/${id}.txt`, "utf-8");
+    data = JSON.parse(content);
 
+    res.json({
+      content: data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.put("/books/:id", async (req, res) => {
+  const id = req.params.id;
+  const update = JSON.stringify(req.body.content);
+  //status return if content not found
+  if (!id) {
+    return res.sendStatus(400, "Content not found");
+  }
+  //update the file
+  await fs.writeFile(`data/books/${id}.txt`, update);
+
+  res.status(200).json({
+    id: id,
+    content: JSON.parse(update),
+  });
+});
+
+app.delete("/books/:id", async (req, res) => {
+  const id = req.params.id;
+
+  if (!id) {
+    return res.sendStatus(400, "No id");
+  }
+  try {
+    await fs.rm(`data/books/${id}.txt`);
+    res.sendStatus(200, "Book deleted");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const port = 8080;
+
 app.listen(port, () => {
   console.log("API Server is running on port " + port);
 });
